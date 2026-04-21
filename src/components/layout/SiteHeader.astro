@@ -1,0 +1,26 @@
+---
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 transition-colors duration-200" data-header>
+  <div class="max-w-content-wide mx-auto px-lg py-md flex items-center justify-between">
+    <a href="/" aria-label="Home" class="text-text-primary font-semibold text-body hover:text-brand transition-colors duration-200">
+      Data Stories
+    </a>
+    <a href="#contact" class="text-small text-text-secondary hover:text-brand transition-colors duration-200">
+      Contact
+    </a>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector('[data-header]') as HTMLElement;
+  if (header) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        header.classList.add('bg-surface/95', 'backdrop-blur-sm', 'border-b', 'border-border');
+      } else {
+        header.classList.remove('bg-surface/95', 'backdrop-blur-sm', 'border-b', 'border-border');
+      }
+    });
+  }
+</script>

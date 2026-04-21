@@ -1,17 +1,50 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/home/HeroSection.astro';
+import { getCollection } from 'astro:content';
+
+const stories = await getCollection('stories');
+const sorted = stories.sort((a, b) => a.data.sortOrder - b.data.sortOrder);
 ---
 
 <BaseLayout>
-  <div class="max-w-content-wide mx-auto px-lg py-4xl">
-    <h1 class="text-display text-text-primary mb-lg">
-      Your data is there. But you <span class="text-brand">can't see it.</span>
-    </h1>
-    <p class="text-body-large text-text-secondary max-w-content-text mb-xl">
-      Every week, your team sends reports you don't read. Dashboards you don't check. Spreadsheets you can't decode.
-    </p>
-    <div class="bg-surface-elevated border border-border rounded-2xl p-2xl">
-      <p class="text-small text-text-muted">Design system verification — tokens working correctly.</p>
+  <HeroSection />
+
+  <!-- Story previews -->
+  <section class="py-3xl">
+    <div class="max-w-content-wide mx-auto px-lg">
+      <div class="space-y-xl">
+        {sorted.map((story) => (
+          <a
+            href={`/stories/${story.id}`}
+            class="block group bg-surface-elevated border border-border rounded-2xl p-xl hover:border-brand hover:-translate-y-0.5 transition-all duration-200"
+          >
+            <div class="flex flex-col md:flex-row md:items-center gap-lg">
+              <div class="flex-shrink-0">
+                <span class="text-h1 font-bold text-brand font-mono">{story.data.statNumber}</span>
+                <p class="text-caption text-text-muted">{story.data.statLabel}</p>
+              </div>
+              <div class="flex-1">
+                <span class="text-caption uppercase tracking-widest text-brand font-semibold">{story.data.industryLabel}</span>
+                <h2 class="text-h3 text-text-primary group-hover:text-brand transition-colors duration-200 mt-xs">
+                  {story.data.title}
+                </h2>
+                <p class="text-body text-text-secondary mt-sm line-clamp-2">{story.data.problemStatement}</p>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
     </div>
-  </div>
+  </section>
+
+  <!-- Who is behind this — subtle, integrated -->
+  <section class="py-2xl border-t border-border">
+    <div class="max-w-content-text mx-auto px-lg text-center">
+      <p class="text-body text-text-secondary">
+        These stories are created by someone who walks into organisations drowning in data
+        and builds the systems that turn chaos into clarity. The work speaks for itself.
+      </p>
+    </div>
+  </section>
 </BaseLayout>
