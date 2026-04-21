@@ -4,11 +4,44 @@ import BaseLayout from './BaseLayout.astro';
 interface Props {
   title: string;
   metaDescription: string;
+  ogImage?: string;
+  slug?: string;
 }
 
-const { title, metaDescription } = Astro.props;
+const { title, metaDescription, ogImage, slug } = Astro.props;
+const siteUrl = Astro.site || 'https://data-stories-site.pages.dev';
+const canonicalUrl = slug ? `${siteUrl}/stories/${slug}` : siteUrl;
+const ogImageUrl = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}/og/default.png`;
 ---
 
 <BaseLayout title={title} description={metaDescription}>
+  <Fragment slot="head">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:url" content={canonicalUrl} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={metaDescription} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": title,
+      "description": metaDescription,
+      "image": ogImageUrl,
+      "url": canonicalUrl,
+    })} />
+  </Fragment>
+
   <slot />
 </BaseLayout>

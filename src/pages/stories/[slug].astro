@@ -4,6 +4,7 @@ import StoryLayout from '../../layouts/StoryLayout.astro';
 import StorySection from '../../components/story/StorySection.astro';
 import ProcessToggle from '../../components/story/ProcessToggle.astro';
 import StoryNavigation from '../../components/story/StoryNavigation.astro';
+import ContactPrompt from '../../components/contact/ContactPrompt.astro';
 
 export async function getStaticPaths() {
   const stories = await getCollection('stories');
@@ -33,7 +34,7 @@ const { story, nextStory, isLast } = Astro.props;
 const { data } = story;
 ---
 
-<StoryLayout title={data.title} metaDescription={data.metaDescription}>
+<StoryLayout title={data.title} metaDescription={data.metaDescription} ogImage={data.ogImage} slug={story.id}>
   <StorySection
     title={data.title}
     industryLabel={data.industryLabel}
@@ -45,6 +46,7 @@ const { data } = story;
     dashboardAccessibleSummary={data.dashboardAccessibleSummary}
   >
     <ProcessToggle processSteps={data.processSteps} />
+    <ContactPrompt ctaText={data.ctaText} storyName={data.title} />
     <StoryNavigation nextStory={nextStory} isLast={isLast} />
   </StorySection>
 </StoryLayout>
