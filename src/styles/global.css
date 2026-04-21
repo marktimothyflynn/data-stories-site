@@ -4,11 +4,85 @@
 
 @import "tailwindcss";
 
+@theme {
+  /* Brand — deep teal/blue-green */
+  --color-brand: #0d9488;
+  --color-brand-dark: #0f766e;
+  --color-brand-light: #ccfbf1;
+
+  /* Surface — warm whites */
+  --color-surface: #faf8f5;
+  --color-surface-elevated: #ffffff;
+
+  /* Text — warm near-blacks and greys */
+  --color-text-primary: #1c1917;
+  --color-text-secondary: #78716c;
+  --color-text-muted: #a8a29e;
+
+  /* Data visualisation */
+  --color-data-1: #0d9488;
+  --color-data-2: #6366f1;
+  --color-data-3: #f59e0b;
+  --color-data-4: #ec4899;
+  --color-data-5: #8b5cf6;
+  --color-data-6: #06b6d4;
+  --color-data-positive: #16a34a;
+  --color-data-negative: #dc2626;
+  --color-data-neutral: #78716c;
+
+  /* Semantic */
+  --color-interactive: #0d9488;
+  --color-interactive-hover: #0f766e;
+  --color-success: #16a34a;
+  --color-warning: #d97706;
+  --color-error: #dc2626;
+
+  /* Borders */
+  --color-border: #e7e5e4;
+  --color-border-strong: #d6d3d1;
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, monospace;
+
+  /* Font sizes with line heights */
+  --text-display: 3rem;
+  --text-display--line-height: 1.2;
+  --text-h1: 2.375rem;
+  --text-h1--line-height: 1.2;
+  --text-h2: 1.875rem;
+  --text-h2--line-height: 1.2;
+  --text-h3: 1.5rem;
+  --text-h3--line-height: 1.2;
+  --text-body-large: 1.125rem;
+  --text-body-large--line-height: 1.6;
+  --text-body: 1rem;
+  --text-body--line-height: 1.6;
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.4;
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1.4;
+
+  /* Spacing — 8px grid */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+  --spacing-4xl: 6rem;
+
+  /* Content widths */
+  --max-width-content-text: 720px;
+  --max-width-content-wide: 1200px;
+}
+
 /* Base styles */
 body {
-  background-color: #faf8f5;
-  color: #1c1917;
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
