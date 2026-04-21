@@ -1,0 +1,60 @@
+---
+import DashboardContainer from './DashboardContainer.astro';
+
+interface Props {
+  title: string;
+  industryLabel: string;
+  statNumber: string;
+  statLabel: string;
+  problemStatement: string;
+  dashboardPath: string;
+  dashboardFallbackImage: string;
+  dashboardAccessibleSummary: string;
+}
+
+const {
+  title,
+  industryLabel,
+  statNumber,
+  statLabel,
+  problemStatement,
+  dashboardPath,
+  dashboardFallbackImage,
+  dashboardAccessibleSummary,
+} = Astro.props;
+---
+
+<section class="py-3xl" aria-labelledby="story-title">
+  <div class="max-w-content-wide mx-auto px-lg">
+    <!-- Story header -->
+    <div class="mb-sm">
+      <span class="text-caption uppercase tracking-widest text-brand font-semibold">{industryLabel}</span>
+    </div>
+    <div class="mb-lg">
+      <span class="text-h1 font-bold text-brand font-mono">{statNumber}</span>
+      <span class="text-small text-text-secondary ml-sm">{statLabel}</span>
+    </div>
+
+    <!-- Side-by-side layout: text left, viz right on desktop -->
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-xl items-start">
+      <!-- Problem statement -->
+      <div class="lg:col-span-2">
+        <h2 id="story-title" class="text-h2 text-text-primary mb-lg">{title}</h2>
+        <p class="text-body-large text-text-secondary">{problemStatement}</p>
+      </div>
+
+      <!-- Dashboard -->
+      <div class="lg:col-span-3">
+        <DashboardContainer
+          dashboardPath={dashboardPath}
+          fallbackImage={dashboardFallbackImage}
+          accessibleSummary={dashboardAccessibleSummary}
+          title={title}
+        />
+      </div>
+    </div>
+
+    <!-- Slot for ProcessToggle, ContactPrompt, StoryNavigation -->
+    <slot />
+  </div>
+</section>

@@ -1,0 +1,38 @@
+---
+interface Props {
+  nextStory?: {
+    slug: string;
+    statNumber: string;
+    title: string;
+    industryLabel: string;
+  };
+  isLast: boolean;
+}
+
+const { nextStory, isLast } = Astro.props;
+---
+
+<div class="mt-2xl pt-xl border-t border-border">
+  {isLast ? (
+    <div class="text-center">
+      <p class="text-body-large text-text-secondary mb-lg">More data stories are coming.</p>
+      <a
+        href="#contact"
+        class="inline-block px-xl py-md bg-brand text-white rounded-lg font-semibold hover:bg-brand-dark transition-colors duration-200"
+      >
+        Have a data problem?
+      </a>
+    </div>
+  ) : nextStory ? (
+    <nav aria-label="Next story">
+      <p class="text-caption uppercase tracking-widest text-text-muted mb-sm">Next story</p>
+      <a href={`/stories/${nextStory.slug}`} class="group block">
+        <span class="text-h1 font-bold text-brand font-mono" aria-hidden="true">{nextStory.statNumber}</span>
+        <h3 class="text-h3 text-text-primary group-hover:text-brand transition-colors duration-200 mt-xs">
+          {nextStory.title}
+        </h3>
+        <span class="text-caption uppercase tracking-widest text-text-muted">{nextStory.industryLabel}</span>
+      </a>
+    </nav>
+  ) : null}
+</div>

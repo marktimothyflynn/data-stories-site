@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+import StoryLayout from '../../layouts/StoryLayout.astro';
+import StorySection from '../../components/story/StorySection.astro';
+import ProcessToggle from '../../components/story/ProcessToggle.astro';
+import StoryNavigation from '../../components/story/StoryNavigation.astro';
+
+export async function getStaticPaths() {
+  const stories = await getCollection('stories');
+  const sorted = stories.sort((a, b) => a.data.sortOrder - b.data.sortOrder);
+
+  return sorted.map((story, index) => {
+    const nextStory = index < sorted.length - 1 ? sorted[index + 1] : null;
+    return {
+      params: { slug: story.id },
+      props: {
+        story,
+        nextStory: nextStory
+          ? {
+              slug: nextStory.id,
+              statNumber: nextStory.data.statNumber,
+              title: nextStory.data.title,
+              industryLabel: nextStory.data.industryLabel,
+            }
+          : null,
+        isLast: index === sorted.length - 1,
+      },
+    };
+  });
+}
+
+const { story, nextStory, isLast } = Astro.props;
+const { data } = story;
+---
+
+<StoryLayout title={data.title} metaDescription={data.metaDescription}>
+  <StorySection
+    title={data.title}
+    industryLabel={data.industryLabel}
+    statNumber={data.statNumber}
+    statLabel={data.statLabel}
+    problemStatement={data.problemStatement}
+    dashboardPath={data.dashboardPath}
+    dashboardFallbackImage={data.dashboardFallbackImage}
+    dashboardAccessibleSummary={data.dashboardAccessibleSummary}
+  >
+    <ProcessToggle processSteps={data.processSteps} />
+    <StoryNavigation nextStory={nextStory} isLast={isLast} />
+  </StorySection>
+</StoryLayout>
