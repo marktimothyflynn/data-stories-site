@@ -1,10 +1,8 @@
-@import "tailwindcss";
-
-/* Inter font — geometric sans-serif */
+/* Font imports must precede Tailwind */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
-/* JetBrains Mono — tabular numerals for data labels */
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+@import "tailwindcss";
 
 /* Base styles */
 body {

@@ -1,17 +1,17 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout>
+  <div class="max-w-content-wide mx-auto px-lg py-4xl">
+    <h1 class="text-display text-text-primary mb-lg">
+      Your data is there. But you <span class="text-brand">can't see it.</span>
+    </h1>
+    <p class="text-body-large text-text-secondary max-w-content-text mb-xl">
+      Every week, your team sends reports you don't read. Dashboards you don't check. Spreadsheets you can't decode.
+    </p>
+    <div class="bg-surface-elevated border border-border rounded-2xl p-2xl">
+      <p class="text-small text-text-muted">Design system verification — tokens working correctly.</p>
+    </div>
+  </div>
+</BaseLayout>
